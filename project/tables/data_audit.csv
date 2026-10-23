@@ -1,0 +1,12 @@
+check,value
+input_rows,8760
+input_columns,14
+exact_duplicates_removed,0
+missing_cells,0
+functioning_hours,8465
+non_functioning_hours,295
+non_functioning_hours_with_nonzero_rentals,0
+active_rows_excluded_for_missing_values,0
+analysis_rows,8465
+first_date,2017-12-01
+last_date,2018-11-30

@@ -1,0 +1,89 @@
+{
+  "scope": "Descriptive summaries across the full observed year. Model evaluation has a separate chronological split.",
+  "overview": [
+    {
+      "total_hours": 8760,
+      "active_hours": 8465,
+      "closed_hours": 295,
+      "first_date": "2017-12-01",
+      "last_date": "2018-11-30",
+      "max_hourly_rentals": 3556,
+      "total_rentals": 6172314
+    }
+  ],
+  "hourly_peaks": [
+    {
+      "season": "Winter",
+      "day_type": "Working day",
+      "hour": 8,
+      "n_hours": 59,
+      "mean_rentals": 574.61016949
+    },
+    {
+      "season": "Winter",
+      "day_type": "Weekend or holiday",
+      "hour": 15,
+      "n_hours": 31,
+      "mean_rentals": 335.90322581
+    },
+    {
+      "season": "Spring",
+      "day_type": "Working day",
+      "hour": 18,
+      "n_hours": 61,
+      "mean_rentals": 1940.83606557
+    },
+    {
+      "season": "Spring",
+      "day_type": "Weekend or holiday",
+      "hour": 17,
+      "n_hours": 29,
+      "mean_rentals": 1222.51724138
+    },
+    {
+      "season": "Summer",
+      "day_type": "Working day",
+      "hour": 18,
+      "n_hours": 64,
+      "mean_rentals": 2351.859375
+    },
+    {
+      "season": "Summer",
+      "day_type": "Weekend or holiday",
+      "hour": 20,
+      "n_hours": 28,
+      "mean_rentals": 1765.42857143
+    },
+    {
+      "season": "Autumn",
+      "day_type": "Working day",
+      "hour": 18,
+      "n_hours": 54,
+      "mean_rentals": 2224.01851852
+    },
+    {
+      "season": "Autumn",
+      "day_type": "Weekend or holiday",
+      "hour": 17,
+      "n_hours": 27,
+      "mean_rentals": 1578.77777778
+    }
+  ],
+  "rain_summary": [
+    {
+      "rain_group": "No recorded rain",
+      "n_hours": 7949,
+      "mean_rentals": 765.63202919
+    },
+    {
+      "rain_group": "Rain recorded",
+      "n_hours": 516,
+      "mean_rentals": 167.25775194
+    }
+  ],
+  "main_finding": "The heatmap shows stronger evening demand in the warmer months, alongside a much quieter winter.",
+  "profile_finding": "The mean working-day peak occurs at 18:00 in spring, summer and autumn, and at 08:00 in winter.",
+  "weather_finding": "For displayed temperature bands containing at least 20 hours per rain group, rainy hours have lower mean rentals than dry hours in every overlapping band.",
+  "caveat": "All findings describe observed associations, with no causal interpretation. Non-functioning service hours are shown separately in the heatmap and excluded from the profile and weather means.",
+  "source": "Seoul Bike Sharing Demand (2020), UCI Machine Learning Repository, https://doi.org/10.24432/C5F62R, CC BY 4.0. Retrieved 23 October 2026."
+}

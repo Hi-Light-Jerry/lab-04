@@ -1,0 +1,531 @@
+{
+  "dataset": {
+    "source": "UCI Machine Learning Repository, Seoul Bike Sharing Demand",
+    "input_file": "data/SeoulBikeData.csv",
+    "sha256": "373339b71a8935d69e9af0abf26a70744632119862eeb3919efb389a7b749c60",
+    "raw_rows": 8760,
+    "active_rows": 8465,
+    "non_functioning_rows": 295,
+    "missing_cells": 0,
+    "first_date": "2017-12-01",
+    "last_date": "2018-11-30"
+  },
+  "split": [
+    {
+      "partition": "Training",
+      "n": 5784,
+      "first_date": "2017-12-01",
+      "last_date": "2018-07-31"
+    },
+    {
+      "partition": "Validation",
+      "n": 1368,
+      "first_date": "2018-08-01",
+      "last_date": "2018-09-29"
+    },
+    {
+      "partition": "Test",
+      "n": 1313,
+      "first_date": "2018-10-01",
+      "last_date": "2018-11-30"
+    }
+  ],
+  "selection": {
+    "rule": "Lowest validation RMSE, before examining the fixed test partition",
+    "selected_model": "Regression tree",
+    "tree_cp": 0.0005,
+    "tree_minbucket": 30,
+    "tree_maxdepth": 8
+  },
+  "validation_metrics": [
+    {
+      "partition": "Validation",
+      "model": "Regression tree",
+      "n": 1368,
+      "rmse": 364.0181369757,
+      "mae": 246.201615261,
+      "r_squared": 0.67652754278,
+      "mean_error": -43.0465230232
+    },
+    {
+      "partition": "Validation",
+      "model": "Linear regression",
+      "n": 1368,
+      "rmse": 420.4235317361,
+      "mae": 333.789996261,
+      "r_squared": 0.56851540537,
+      "mean_error": 25.8204918513
+    },
+    {
+      "partition": "Validation",
+      "model": "Calendar baseline",
+      "n": 1368,
+      "rmse": 543.3330286106,
+      "mae": 422.7225177844,
+      "r_squared": 0.27935152063,
+      "mean_error": -324.9822314625
+    }
+  ],
+  "test_metrics": [
+    {
+      "partition": "Test",
+      "model": "Calendar baseline",
+      "n": 1313,
+      "rmse": 386.1236225141,
+      "mae": 276.0103782328,
+      "r_squared": 0.52676153149,
+      "mean_error": -142.2604410013,
+      "selected_on_validation": false
+    },
+    {
+      "partition": "Test",
+      "model": "Linear regression",
+      "n": 1313,
+      "rmse": 353.0765442384,
+      "mae": 284.2409028635,
+      "r_squared": 0.60430092889,
+      "mean_error": -243.1301131838,
+      "selected_on_validation": false
+    },
+    {
+      "partition": "Test",
+      "model": "Regression tree",
+      "n": 1313,
+      "rmse": 438.861283157,
+      "mae": 307.0548242511,
+      "r_squared": 0.38866137836,
+      "mean_error": -249.0309070427,
+      "selected_on_validation": true
+    }
+  ],
+  "descriptive": {
+    "hourly_profile": [
+      {
+        "day_type": "Working day",
+        "hour": 0,
+        "n": 238,
+        "mean_rentals": 515.9033613445,
+        "median_rentals": 501.5
+      },
+      {
+        "day_type": "Working day",
+        "hour": 1,
+        "n": 238,
+        "mean_rentals": 395.6260504202,
+        "median_rentals": 386
+      },
+      {
+        "day_type": "Working day",
+        "hour": 2,
+        "n": 238,
+        "mean_rentals": 268.7521008403,
+        "median_rentals": 255.5
+      },
+      {
+        "day_type": "Working day",
+        "hour": 3,
+        "n": 238,
+        "mean_rentals": 177.8109243697,
+        "median_rentals": 168.5
+      },
+      {
+        "day_type": "Working day",
+        "hour": 4,
+        "n": 238,
+        "mean_rentals": 120.9915966387,
+        "median_rentals": 113.5
+      },
+      {
+        "day_type": "Working day",
+        "hour": 5,
+        "n": 238,
+        "mean_rentals": 154.1134453782,
+        "median_rentals": 148.5
+      },
+      {
+        "day_type": "Working day",
+        "hour": 6,
+        "n": 238,
+        "mean_rentals": 362.4117647059,
+        "median_rentals": 368.5
+      },
+      {
+        "day_type": "Working day",
+        "hour": 7,
+        "n": 238,
+        "mean_rentals": 805.268907563,
+        "median_rentals": 828
+      },
+      {
+        "day_type": "Working day",
+        "hour": 8,
+        "n": 238,
+        "mean_rentals": 1353.5462184874,
+        "median_rentals": 1578
+      },
+      {
+        "day_type": "Working day",
+        "hour": 9,
+        "n": 238,
+        "mean_rentals": 746.8319327731,
+        "median_rentals": 851.5
+      },
+      {
+        "day_type": "Working day",
+        "hour": 10,
+        "n": 238,
+        "mean_rentals": 543.1890756303,
+        "median_rentals": 606
+      },
+      {
+        "day_type": "Working day",
+        "hour": 11,
+        "n": 238,
+        "mean_rentals": 612.0840336134,
+        "median_rentals": 644
+      },
+      {
+        "day_type": "Working day",
+        "hour": 12,
+        "n": 238,
+        "mean_rentals": 696.8277310924,
+        "median_rentals": 718
+      },
+      {
+        "day_type": "Working day",
+        "hour": 13,
+        "n": 238,
+        "mean_rentals": 697.7394957983,
+        "median_rentals": 706.5
+      },
+      {
+        "day_type": "Working day",
+        "hour": 14,
+        "n": 238,
+        "mean_rentals": 712.3613445378,
+        "median_rentals": 715
+      },
+      {
+        "day_type": "Working day",
+        "hour": 15,
+        "n": 238,
+        "mean_rentals": 785.1470588235,
+        "median_rentals": 783
+      },
+      {
+        "day_type": "Working day",
+        "hour": 16,
+        "n": 238,
+        "mean_rentals": 908.9117647059,
+        "median_rentals": 916
+      },
+      {
+        "day_type": "Working day",
+        "hour": 17,
+        "n": 238,
+        "mean_rentals": 1194.8277310924,
+        "median_rentals": 1291.5
+      },
+      {
+        "day_type": "Working day",
+        "hour": 18,
+        "n": 238,
+        "mean_rentals": 1766.3151260504,
+        "median_rentals": 1932
+      },
+      {
+        "day_type": "Working day",
+        "hour": 19,
+        "n": 238,
+        "mean_rentals": 1330.7226890756,
+        "median_rentals": 1445
+      },
+      {
+        "day_type": "Working day",
+        "hour": 20,
+        "n": 238,
+        "mean_rentals": 1156.512605042,
+        "median_rentals": 1225
+      },
+      {
+        "day_type": "Working day",
+        "hour": 21,
+        "n": 238,
+        "mean_rentals": 1119.0420168067,
+        "median_rentals": 1193
+      },
+      {
+        "day_type": "Working day",
+        "hour": 22,
+        "n": 238,
+        "mean_rentals": 1008.2142857143,
+        "median_rentals": 1057.5
+      },
+      {
+        "day_type": "Working day",
+        "hour": 23,
+        "n": 238,
+        "mean_rentals": 715.3697478992,
+        "median_rentals": 683.5
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 0,
+        "n": 114,
+        "mean_rentals": 656.5614035088,
+        "median_rentals": 694
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 1,
+        "n": 114,
+        "mean_rentals": 538.5789473684,
+        "median_rentals": 538
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 2,
+        "n": 114,
+        "mean_rentals": 404.6666666667,
+        "median_rentals": 413
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 3,
+        "n": 114,
+        "mean_rentals": 279.798245614,
+        "median_rentals": 288.5
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 4,
+        "n": 114,
+        "mean_rentals": 171.9298245614,
+        "median_rentals": 170
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 5,
+        "n": 114,
+        "mean_rentals": 123.5614035088,
+        "median_rentals": 107
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 6,
+        "n": 114,
+        "mean_rentals": 164.0964912281,
+        "median_rentals": 141
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 7,
+        "n": 115,
+        "mean_rentals": 256.852173913,
+        "median_rentals": 259
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 8,
+        "n": 115,
+        "mean_rentals": 422.4956521739,
+        "median_rentals": 439
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 9,
+        "n": 115,
+        "mean_rentals": 504.6782608696,
+        "median_rentals": 526
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 10,
+        "n": 115,
+        "mean_rentals": 551.0956521739,
+        "median_rentals": 563
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 11,
+        "n": 115,
+        "mean_rentals": 640.3043478261,
+        "median_rentals": 592
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 12,
+        "n": 115,
+        "mean_rentals": 777.8347826087,
+        "median_rentals": 754
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 13,
+        "n": 115,
+        "mean_rentals": 883.2434782609,
+        "median_rentals": 843
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 14,
+        "n": 115,
+        "mean_rentals": 934.1652173913,
+        "median_rentals": 919
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 15,
+        "n": 115,
+        "mean_rentals": 1006.852173913,
+        "median_rentals": 946
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 16,
+        "n": 115,
+        "mean_rentals": 1072.6608695652,
+        "median_rentals": 974
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 17,
+        "n": 115,
+        "mean_rentals": 1140.7565217391,
+        "median_rentals": 1011
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 18,
+        "n": 115,
+        "mean_rentals": 1114.652173913,
+        "median_rentals": 934
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 19,
+        "n": 115,
+        "mean_rentals": 1039.2782608696,
+        "median_rentals": 957
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 20,
+        "n": 115,
+        "mean_rentals": 999.3217391304,
+        "median_rentals": 877
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 21,
+        "n": 115,
+        "mean_rentals": 957.8,
+        "median_rentals": 983
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 22,
+        "n": 115,
+        "mean_rentals": 842.3130434783,
+        "median_rentals": 841
+      },
+      {
+        "day_type": "Weekend or holiday",
+        "hour": 23,
+        "n": 115,
+        "mean_rentals": 649.5913043478,
+        "median_rentals": 655
+      }
+    ],
+    "monthly": [
+      {
+        "month": "2017-12-01",
+        "active_hours": 744,
+        "mean_rentals": 249.0994623656,
+        "total_rentals": 185330
+      },
+      {
+        "month": "2018-01-01",
+        "active_hours": 744,
+        "mean_rentals": 201.6209677419,
+        "total_rentals": 150006
+      },
+      {
+        "month": "2018-02-01",
+        "active_hours": 672,
+        "mean_rentals": 225.9419642857,
+        "total_rentals": 151833
+      },
+      {
+        "month": "2018-03-01",
+        "active_hours": 744,
+        "mean_rentals": 511.5510752688,
+        "total_rentals": 380594
+      },
+      {
+        "month": "2018-04-01",
+        "active_hours": 696,
+        "mean_rentals": 753.1997126437,
+        "total_rentals": 524227
+      },
+      {
+        "month": "2018-05-01",
+        "active_hours": 720,
+        "mean_rentals": 982.0666666667,
+        "total_rentals": 707088
+      },
+      {
+        "month": "2018-06-01",
+        "active_hours": 720,
+        "mean_rentals": 1245.6763888889,
+        "total_rentals": 896887
+      },
+      {
+        "month": "2018-07-01",
+        "active_hours": 744,
+        "mean_rentals": 987.1774193548,
+        "total_rentals": 734460
+      },
+      {
+        "month": "2018-08-01",
+        "active_hours": 744,
+        "mean_rentals": 876.1922043011,
+        "total_rentals": 651887
+      },
+      {
+        "month": "2018-09-01",
+        "active_hours": 624,
+        "mean_rentals": 1079.5064102564,
+        "total_rentals": 673612
+      },
+      {
+        "month": "2018-10-01",
+        "active_hours": 665,
+        "mean_rentals": 978.4586466165,
+        "total_rentals": 650675
+      },
+      {
+        "month": "2018-11-01",
+        "active_hours": 648,
+        "mean_rentals": 718.6959876543,
+        "total_rentals": 465715
+      }
+    ],
+    "rain": [
+      {
+        "weather": "No rain recorded",
+        "n": 7949,
+        "mean_rentals": 765.6320291861,
+        "median_rentals": 591
+      },
+      {
+        "weather": "Rain recorded",
+        "n": 516,
+        "mean_rentals": 167.257751938,
+        "median_rentals": 71
+      }
+    ]
+  },
+  "caveats": ["Observed same-hour weather: conditional retrospective prediction, not an operational advance forecast.", "Active-service hours only; closures are not treated as zero-demand hours.", "A single city and annual cycle; temporal holdout measures a specific seasonal shift.", "Associational analysis does not identify causal effects.", "Hourly serial dependence means conventional independent-observation inference is inappropriate."],
+  "random_seed": 20261023
+}

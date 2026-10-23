@@ -1,0 +1,9 @@
+season,day_type,n_dates,n_hours
+Winter,Working day,59,1416
+Winter,Weekend or holiday,31,744
+Spring,Working day,61,1464
+Spring,Weekend or holiday,29,696
+Summer,Working day,64,1536
+Summer,Weekend or holiday,28,672
+Autumn,Working day,54,1296
+Autumn,Weekend or holiday,27,641

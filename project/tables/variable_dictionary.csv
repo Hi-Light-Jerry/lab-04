@@ -1,0 +1,15 @@
+source_column,variable,description
+Date,date,Seoul local calendar date
+Rented Bike Count,rentals,Bikes rented during this hour
+Hour,hour,"Local hour, 0 to 23"
+Temperature(°C),temp_c,"Air temperature, degrees Celsius"
+Humidity(%),humidity_pct,"Relative humidity, percent"
+Wind speed (m/s),wind_ms,"Wind speed, metres per second"
+Visibility (10m),visibility_10m,Visibility in units of 10 metres
+Dew point temperature(°C),dewpoint_c,"Dew-point temperature, degrees Celsius"
+Solar Radiation (MJ/m2),solar_mj_m2,"Solar radiation, megajoules per square metre"
+Rainfall(mm),rainfall_mm,"Rainfall, millimetres"
+Snowfall (cm),snowfall_cm,"Snowfall, centimetres"
+Seasons,season,Recorded season
+Holiday,holiday,Holiday or No Holiday
+Functioning Day,functioning,Whether the bike service was functioning

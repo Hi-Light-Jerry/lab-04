@@ -1,0 +1,4 @@
+partition,n,first_date,last_date
+Training,5784,2017-12-01,2018-07-31
+Validation,1368,2018-08-01,2018-09-29
+Test,1313,2018-10-01,2018-11-30

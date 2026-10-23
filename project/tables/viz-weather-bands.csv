@@ -1,0 +1,22 @@
+temperature_band_low,temperature_band_mid,rain_group,n_hours,mean_rentals,displayed
+-20,-17.5,No recorded rain,44,105.56818181818181,TRUE
+-15,-12.5,No recorded rain,182,150.57692307692307,TRUE
+-10,-7.5,No recorded rain,466,179.54506437768248,TRUE
+-10,-7.5,Rain recorded,6,52.166666666666664,FALSE
+-5,-2.5,No recorded rain,724,229.86740331491717,TRUE
+-5,-2.5,Rain recorded,11,115.0909090909091,FALSE
+0,2.5,No recorded rain,1020,336.95196078431485,TRUE
+0,2.5,Rain recorded,40,82.425,TRUE
+5,7.5,No recorded rain,997,553.7321965897678,TRUE
+5,7.5,Rain recorded,61,64.40983606557377,TRUE
+10,12.5,No recorded rain,886,795.4717832957116,TRUE
+10,12.5,Rain recorded,59,116.05084745762713,TRUE
+15,17.5,No recorded rain,994,997.5945674044264,TRUE
+15,17.5,Rain recorded,111,116.45045045045043,TRUE
+20,22.5,No recorded rain,1158,1227.3799654576846,TRUE
+20,22.5,Rain recorded,187,176.95187165775397,TRUE
+25,27.5,No recorded rain,959,1265.149113660061,TRUE
+25,27.5,Rain recorded,36,526.1944444444445,TRUE
+30,32.5,No recorded rain,423,1159.6241134751774,TRUE
+30,32.5,Rain recorded,5,1138.8,FALSE
+35,37.5,No recorded rain,96,902.1145833333333,TRUE

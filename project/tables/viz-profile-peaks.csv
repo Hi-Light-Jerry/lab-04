@@ -1,0 +1,9 @@
+season,day_type,hour,n_hours,mean_rentals
+Winter,Working day,8,59,574.6101694915254
+Winter,Weekend or holiday,15,31,335.9032258064516
+Spring,Working day,18,61,1940.8360655737704
+Spring,Weekend or holiday,17,29,1222.5172413793105
+Summer,Working day,18,64,2351.859375
+Summer,Weekend or holiday,20,28,1765.4285714285713
+Autumn,Working day,18,54,2224.0185185185187
+Autumn,Weekend or holiday,17,27,1578.7777777777778

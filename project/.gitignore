@@ -2,3 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
+outputs/analysis-results.rds
+outputs/analysis-run.log
+*_files/
+*.knit.md
+*.utf8.md

@@ -1,0 +1,59 @@
+term,estimate
+(Intercept),793.9444827687365
+hour_factor1,-118.27552174917817
+hour_factor2,-226.82499714334008
+hour_factor3,-291.4773742303856
+hour_factor4,-352.3411316507556
+hour_factor5,-323.64326569197135
+hour_factor6,-104.40221622264112
+hour_factor7,291.0949912703903
+hour_factor8,757.064351867035
+hour_factor9,128.5805311199297
+hour_factor10,-167.38756670677557
+hour_factor11,-166.49306467268607
+hour_factor12,-124.89010109935587
+hour_factor13,-144.43060165994464
+hour_factor14,-143.65040334833526
+hour_factor15,-62.08081824353617
+hour_factor16,86.21598448023353
+hour_factor17,431.90810088710253
+hour_factor18,1068.2313473984627
+hour_factor19,699.63599720315494
+hour_factor20,585.4204129445012
+hour_factor21,579.83289054466
+hour_factor22,460.06883800910043
+hour_factor23,188.19389260164593
+day_typeWeekend or holiday,111.29912465949405
+temp_c,19.077483290708898
+I(temp_c^2),-0.40199596609967514
+humidity_pct,-6.013884517683224
+wind_ms,2.151679927315157
+visibility_10m,-7.923159267411573e-4
+solar_mj_m2,82.15227421233875
+log1p(rainfall_mm),-418.20815413596273
+log1p(snowfall_cm),105.27506676376785
+doy_sin,-65.11189261060143
+doy_cos,-357.5346155150369
+hour_factor1:day_typeWeekend or holiday,8.472579594712107
+hour_factor2:day_typeWeekend or holiday,-2.489512055949829
+hour_factor3:day_typeWeekend or holiday,-50.2382537253577
+hour_factor4:day_typeWeekend or holiday,-90.54932348818025
+hour_factor5:day_typeWeekend or holiday,-154.44130840240112
+hour_factor6:day_typeWeekend or holiday,-311.59591447392467
+hour_factor7:day_typeWeekend or holiday,-645.3941308243778
+hour_factor8:day_typeWeekend or holiday,-989.4561765763599
+hour_factor9:day_typeWeekend or holiday,-341.8044023518424
+hour_factor10:day_typeWeekend or holiday,-99.68218710979237
+hour_factor11:day_typeWeekend or holiday,-83.41109145514575
+hour_factor12:day_typeWeekend or holiday,-35.34173504623907
+hour_factor13:day_typeWeekend or holiday,32.89866959492827
+hour_factor14:day_typeWeekend or holiday,59.47811299327794
+hour_factor15:day_typeWeekend or holiday,86.7375511114306
+hour_factor16:day_typeWeekend or holiday,29.480050162376653
+hour_factor17:day_typeWeekend or holiday,-182.42931468341908
+hour_factor18:day_typeWeekend or holiday,-757.2422972853109
+hour_factor19:day_typeWeekend or holiday,-379.71528944534623
+hour_factor20:day_typeWeekend or holiday,-271.7997348849761
+hour_factor21:day_typeWeekend or holiday,-294.8804520038995
+hour_factor22:day_typeWeekend or holiday,-278.24923209084966
+hour_factor23:day_typeWeekend or holiday,-185.40430746600313

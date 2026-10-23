@@ -1,216 +1,162 @@
 ---
-title: "Presentation title"
-subtitle: "Presentation subtitle (if any)"
-author: "Team name <br> Names of team members"
+title: "When does Seoul rent a bike?"
+subtitle: "Hourly demand, weather and a test of prediction"
+author: "IDS project team"
 institute: "University of Edinburgh"
-date: "`r Sys.Date()`"
+date: "23 October 2026"
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    css: [default, xaringan-themer.css]
+    self_contained: true
     lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    mathjax: null
     nature:
       ratio: "16:9"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-      
 ---
 
-```{r install-package, include = FALSE, eval = FALSE}
-# Copy and paste the following code into your console to download and install
-# the `xaringan` package that contains all of the code which allows you 
-# to create presentation slides in Rmarkdown
-install.packages('xaringan')
-```
-
-
-```{r load-packages, include = FALSE}
-# Add any additional packages you need to this chunk
-library(tidyverse)
-library(tidymodels)
-library(palmerpenguins)
-library(knitr)
-library(xaringanthemer)
-```
-
 ```{r setup, include=FALSE}
-# For better figure resolution
-knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
+                     fig.align = "center", out.width = "100%")
+if (!exists("analysis_results", inherits = TRUE)) {
+  source("scripts/analysis.R")
+  analysis_results <- run_analysis()
+}
+res <- analysis_results
+if (!file.exists("img/fig-01-demand-heatmap.png")) source("scripts/visualisations.R")
+fmt <- function(x, digits = 0) formatC(x, format = "f", digits = digits, big.mark = ",")
+comparison <- dplyr::left_join(
+  res$validation_metrics |> dplyr::select(model, validation_rmse = rmse),
+  res$test_metrics |> dplyr::select(model, test_rmse = rmse, test_mae = mae),
+  by = "model"
+) |>
+  dplyr::mutate(selected = model == res$selected_model) |>
+  dplyr::arrange(match(model, c("Calendar baseline", "Linear regression", "Regression tree")))
+tree_test <- res$test_metrics$rmse[res$test_metrics$model == "Regression tree"]
+base_test <- res$test_metrics$rmse[res$test_metrics$model == "Calendar baseline"]
 ```
 
-```{r load-data, include=FALSE}
-# Load your data here
+# One year, two questions
 
+**When do people rent bicycles?**
+
+How do hourly patterns differ across seasons and day types?
+
+**Do earlier patterns predict later demand?**
+
+Does adding measured weather improve a calendar baseline?
+
+.source[
+UCI Seoul Bike Sharing Demand, DOI: 10.24432/C5F62R. `r fmt(nrow(res$data))` hourly records, December 2017 to November 2018.
+]
+
+???
+About 60 seconds including a 20-second introduction on the title slide. Explain that the study concerns completed rentals across Seoul's system. Introduce the descriptive question and the later prediction test. There are 14 original columns, with numeric weather variables and categorical calendar indicators. The record covers one city and one annual cycle. Completed rentals do not reveal unmet demand when bicycles are unavailable. Speaking allocations in README are suggestions for the team to confirm.
+
+---
+
+class: figure-slide
+
+# A year of demand, hour by hour
+
+```{r annual-heatmap, out.width="100%"}
+knitr::include_graphics("img/fig-01-demand-heatmap.png")
 ```
 
-```{r include=FALSE}
+???
+About 85 seconds. This is the main visualisation. Read dates horizontally and local hours vertically. Warmer-month evenings have much higher recorded demand, while winter is generally quieter. Colour uses a square-root scale, with the legend in original rental counts. Coral identifies 295 non-functioning hours, all with zero rentals. These hours remain visible but do not enter the active-service model. Avoid claiming weather causes the annual difference.
 
-#Background image
-style_xaringan(
-  title_slide_background_image = "img/confetti.jpg"
-)
+---
+
+class: figure-slide
+
+# The daily profile changes with the calendar
+
+```{r seasonal-profiles, out.width="91%"}
+knitr::include_graphics("img/fig-02-hourly-profiles.png")
 ```
+
+???
+About 65 seconds. The two lines compare working days with weekends or holidays within each recorded season. Working days mean Monday to Friday excluding recorded holidays. The working-day peak is at 18:00 in spring, summer and autumn, and at 08:00 in winter. These are group means over operating hours. They suggest a commuting pattern, but journey purposes are unavailable. Group composition and weather can differ.
+
+---
+
+# Prediction follows the calendar
+
+```{r partition-table}
+res$split_summary |>
+  dplyr::transmute(
+    Partition = partition,
+    `Nominal period` = c("Dec 2017 to Jul 2018", "Aug to Sep 2018", "Oct to Nov 2018"),
+    `Operating hours` = format(n, big.mark = ",", trim = TRUE)
+  ) |>
+  knitr::kable(format = "html")
+```
+
+Calendar mean, linear regression and regression tree.
+
+Select on validation RMSE. Refit with earlier data. Evaluate the fixed test period.
+
+.note[Weather describes the same hour. This evaluates retrospective conditional prediction.]
+
+???
+About 65 seconds. We exclude the 295 closure hours and retain 8465 operating hours. The baseline averages each hour and weekday combination. The linear model adds weather, calendar interactions and continuous annual terms. The tree allows nonlinear splits and is pruned using validation error. Clip predictions at zero. The nominal validation window ends 30 September, but its last active observation is 29 September because the final day is a closure day. Same-hour weather would require forecasts for an advance operational prediction.
+
+---
+
+# The validation winner struggles in later months
+
+```{r metric-table}
+comparison |>
+  dplyr::transmute(
+    Model = ifelse(selected, paste0(model, " *"), model),
+    `Validation RMSE` = round(validation_rmse, 1),
+    `Test RMSE` = round(test_rmse, 1),
+    `Test MAE` = round(test_mae, 1)
+  ) |>
+  knitr::kable(format = "html")
+```
+
+**The selected tree has `r fmt(100 * (tree_test / base_test - 1), 1)`% higher test RMSE than the calendar baseline.**
+
+.note[The asterisk marks selection using validation only. Errors are bicycles per hour. Lower is better.]
+
+???
+About 75 seconds. RMSE weights large errors more heavily, while MAE averages absolute errors. The tree wins on validation, but its later RMSE is worse than the baseline. We retain that finding and do not retune on test data. Linear regression has the lowest test RMSE among these frozen comparisons, while the baseline has the lowest test MAE. The different rankings show why an unqualified best-model claim would be misleading. A single validation period can favour patterns that change in later months.
+
+---
+
+# What the evidence supports
+
+Hourly and seasonal structure matters for describing realised rentals.
+
+The validation-selected model does not improve the later-period baseline.
+
+**Before operational use:** more years, repeated validation windows and actual weather forecasts.
+
+.note[One city, one annual cycle. Aggregate observations. Association does not establish causation.]
+
+???
+About 55 seconds. Adjacent hours are dependent, so we do not report independent-observation significance tests. The data have no station-level availability or journey purpose. Closures change the prediction scope. More years would allow genuinely new annual cycles for validation. Additional geographic and access information would be needed before recommending resource changes that affect different communities. These are proposals for future work, not analyses already completed.
+
+---
 
 class: center, middle
 
-## A statement of the overall goal / research question
+# Discussion
 
----
+**Which errors would matter most to a bike sharing operator?**
 
-class: inverse, center, middle
+Underestimating a busy hour and overestimating a quiet hour can have different costs.
 
-# Section title
+.source[
+Data: [UCI dataset 560](https://doi.org/10.24432/C5F62R), CC BY 4.0, retrieved 23 October 2026.
 
----
-
-# Hello World
-
-- Click the `Knit` button to compile your presentation
-
-- Make sure to commit and push all resulting files to your GitHub repo
-
----
-
-class: inverse, middle, center
-
-# Using xaringan
-
----
-
-# xaringan
-
-- The presentation is created using the `xaringan` package
-
-- Use `---` to separate slides and `--` for incremental builds
-
---
-
-- Like this
-
----
-
-# Layouts
-
-You can use plain text
-
-- or bullet points
-
-.pull-left[
-or text in two columns $^*$
-]
-.pull-right[
-- like
-- this
+Code and report: [github.com/Hi-Light-Jerry/lab-04](https://github.com/Hi-Light-Jerry/lab-04).
 ]
 
-.footnote[
-[*] And add footnotes
-]
-
----
-
-# Code
-
-```{r boring-regression}
-# a boring regression
-model <- lm(dist ~ speed, data = cars)
-tidy(model)
-glance(model)
-```
-
----
-
-# Plots
-
-```{r recode-species, echo = FALSE}
-# In this chunk I'm doing a bunch of analysis that I don't want to present 
-# in my slides. But I need the resulting data frame for a plot I want to present.
-iris_modified <- iris %>%
-  mutate(Species = fct_other(Species, keep = "setosa"))
-```
-
-```{r plot-iris, echo = FALSE}
-# Code hidden with echo = FALSE
-# Uses modified iris dataset from previous chunk
-# Play around with height and width until you're happy with the look
-ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point() + 
-  theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
-```
-
----
-
-## Plot and text
-
-.pull-left[
-- Some text
-- goes here
-]
-.pull-right[
-```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
-# see how I changed out.width and fig.width from defaults
-# to make the figure bigger
-ggplot(penguins, aes(x = bill_length_mm, y = species, color = species)) +
-  geom_boxplot() +
-  theme_minimal()
-```
-]
-
----
-
-# Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
-
-```{r iris-table, echo = FALSE}
-kable(head(iris), format = "html")
-```
-
----
-
-# Images
-
-```{r castle, echo = FALSE, out.width = "55%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
-include_graphics("img/edinburgh-castle.jpg")
-```
-
-Or you can also include a full page image. See next slide.
-
----
-
-
-class: inverse, center, middle
-background-image: url(img/edinburgh-castle.jpg)
-background-size: contain
----
-
-# Math Expressions
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &#36;\alpha+\beta$ renders $\alpha+\beta$. You can use the display style with double dollar signs:
-
-```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-
-Limitations:
-
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
-
----
-
-# Feeling adventurous?
-
-- Want to find out more about `xaringan`? See https://slides.yihui.name/xaringan/#1.
-
-- You are welcome to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
-
-- But some of you might want to play around with slide styling. The 
-`xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
-
-- And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
+???
+About 15 seconds to close, followed by up to two minutes of questions. Total planned talk is seven minutes. Each team member should speak. Explain that the full report, working investigation, raw input and reproducible R code are in the repository.

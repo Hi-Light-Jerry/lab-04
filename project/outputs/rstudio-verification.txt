@@ -1,0 +1,3 @@
+RStudio 2026.9.0.174
+RSTUDIO 1
+Analysis, visualisations and all three HTML documents regenerated in RStudio
